@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "857c2be3-4ca9-4797-8df6-3c0e26979460"
+      }
+    },
+    "owner": "kalmbik61"
   }
 }
