@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, Text } from "react-native";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import GlobalProvider from "./GlobalProvider";
 import Container from "./src/components/Container/Container";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { ROUTS_NAMES } from "./src/utils/routsNames";
+import Home from "./src/components/screens/Home/Home";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
@@ -15,7 +20,7 @@ export default function App() {
         const fonts = () =>
           Font.loadAsync({
             "mt-bold": require("./assets/fonts/MontserratAlternates-Bold.ttf"),
-            "mt-ligth": require("./assets/fonts/MontserratAlternates-Light.ttf"),
+            "mt-light": require("./assets/fonts/MontserratAlternates-Light.ttf"),
             "mt-medium": require("./assets/fonts/MontserratAlternates-Medium.ttf"),
           });
         await fonts();
@@ -46,14 +51,20 @@ export default function App() {
 
   return (
     <GlobalProvider>
-      <Container>
-        <View>
-          <Text style={{ color: "#fff" }}>
-            Open up App.tsx to start working on your app!
-          </Text>
-          <StatusBar style='auto' />
-        </View>
-      </Container>
+      {/* <Container> */}
+      <Stack.Navigator initialRouteName={ROUTS_NAMES.HOME}>
+        <Stack.Screen
+          options={{
+            header(props) {
+              return null;
+            },
+          }}
+          name={ROUTS_NAMES.HOME}
+          component={Home}
+        />
+      </Stack.Navigator>
+      {/* </Container> */}
+      <StatusBar style='auto' />
     </GlobalProvider>
   );
 }

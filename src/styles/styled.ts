@@ -1,0 +1,15 @@
+export interface IVariables {
+  colors: {
+    grey: string;
+  };
+  backgrounds: {
+    primary: string;
+    dark: string;
+    purple: string;
+    light_purple: string;
+  };
+  linear: {
+    primary: string;
+    secondary: string;
+  };
+}

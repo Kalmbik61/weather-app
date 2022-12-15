@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.1",
+    "@react-navigation/native-stack": "^6.9.6",
     "expo": "~47.0.8",
     "expo-font": "^11.0.1",
+    "expo-linear-gradient": "~12.0.1",
     "expo-splash-screen": "^0.17.5",
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
@@ -26,7 +28,8 @@
     "@types/react-native": "~0.70.6",
     "@types/styled-components": "^5.1.26",
     "@types/styled-components-react-native": "^5.2.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.9.4",
+    "typescript-styled-plugin": "^0.18.2"
   },
   "private": true
 }

@@ -1,13 +1,12 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import styled from "styled-components/native";
+import styled, { DefaultTheme } from "styled-components/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Container = styled.View`
-  height: 100px;
+  height: 100%;
   width: 100%;
-  position: absolute;
   bottom: 0;
-  background: #000;
   padding: 20px;
   flex: 1;
   align-items: center;
@@ -46,19 +45,31 @@ const Plus_BG = styled.Image`
 
 export default function Footer() {
   return (
-    <Container>
-      <TouchableOpacity>
-        <Menu source={require("../../../assets/icons/menu.png")} />
-      </TouchableOpacity>
-      <PlusBtnContainer>
-        <Plus_BG source={require("../../../assets/icons/bg_btn.png")} />
+    <LinearGradient
+      colors={["#2E335A", "#1C1B33"]}
+      style={{
+        height: 100,
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        overflow: "visible",
+      }}
+    >
+      <Container>
         <TouchableOpacity>
-          <Plus source={require("../../../assets/icons/plus.png")} />
+          <Menu source={require("../../../assets/icons/map.png")} />
         </TouchableOpacity>
-      </PlusBtnContainer>
-      <TouchableOpacity>
-        <Menu source={require("../../../assets/icons/menu.png")} />
-      </TouchableOpacity>
-    </Container>
+        <PlusBtnContainer>
+          <Plus_BG source={require("../../../assets/icons/bg_btn.png")} />
+          <TouchableOpacity>
+            <Plus source={require("../../../assets/icons/plus.png")} />
+          </TouchableOpacity>
+        </PlusBtnContainer>
+        <TouchableOpacity>
+          <Menu source={require("../../../assets/icons/menu.png")} />
+        </TouchableOpacity>
+      </Container>
+    </LinearGradient>
   );
 }

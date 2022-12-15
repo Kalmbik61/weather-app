@@ -9,14 +9,21 @@ const MainContainer = styled.View`
   flex: 1;
 `;
 
+const Home_Pic = styled.Image`
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  left: 0;
+  bottom: 90px;
+`;
+
 export default function Container({ children }: IContainerProps) {
   return (
     <MainContainer>
-      <View>
-        <ImageBackground
-          source={require("../../../assets/imgs/background.png")}
-        />
-      </View>
+      <ImageBackground
+        source={require("../../../assets/imgs/background.png")}
+      />
+      <Home_Pic source={require("../../../assets/imgs/house.png")} />
       <SafeAreaView>{children}</SafeAreaView>
 
       <Footer />
