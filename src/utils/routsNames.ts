@@ -1,4 +1,5 @@
 export enum ROUTS_NAMES {
-  HOME = "home",
-  WEATHER = "weather",
+  HOME = "Wome",
+  ADD_CITY = "Add city",
+  WEATHER = "Weather",
 }

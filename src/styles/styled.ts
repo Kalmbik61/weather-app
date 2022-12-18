@@ -1,6 +1,7 @@
 export interface IVariables {
   colors: {
     grey: string;
+    dark_grey: string;
   };
   backgrounds: {
     primary: string;
@@ -9,7 +10,7 @@ export interface IVariables {
     light_purple: string;
   };
   linear: {
-    primary: string;
-    secondary: string;
+    primary: string[];
+    secondary: string[];
   };
 }

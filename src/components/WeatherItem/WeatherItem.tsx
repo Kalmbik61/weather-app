@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
-import { IFeelsLikeProps } from "./FeelsLike.props";
+import { IWeatherItemProps } from "./WeatherItem.props";
 
 const Text = styled.Text`
   color: ${({ theme }) => theme.colors.grey};
@@ -17,13 +17,13 @@ const Value = styled.Text`
   font-size: 25px;
 `;
 
-export default function FeelsLike({ K }: IFeelsLikeProps) {
-  if (!K) return null;
+export default function WeatherItem({ name, value, style }: IWeatherItemProps) {
+  if (!value) return null;
 
   return (
     <LinearGradient style={styles.wrapper} colors={["#2E335A", "#1C1B33"]}>
-      <Text>Feels like </Text>
-      <Value>{Math.round(K - 273.15)} °</Value>
+      <Text>{name}</Text>
+      <Value>{value}</Value>
     </LinearGradient>
   );
 }
@@ -36,5 +36,6 @@ const styles = StyleSheet.create({
     height: 100,
     opacity: 0.9,
     justifyContent: "center",
+    margin: 10,
   },
 });

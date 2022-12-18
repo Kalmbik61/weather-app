@@ -2,6 +2,8 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import styled, { DefaultTheme } from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import { ROUTS_NAMES } from "../../utils/routsNames";
 
 const Container = styled.View`
   height: 100%;
@@ -44,6 +46,10 @@ const Plus_BG = styled.Image`
 `;
 
 export default function Footer() {
+  const navigation = useNavigation();
+
+  const goToAddCity = () => navigation.navigate(ROUTS_NAMES.ADD_CITY);
+
   return (
     <LinearGradient
       colors={["#2E335A", "#1C1B33"]}
@@ -58,11 +64,14 @@ export default function Footer() {
     >
       <Container>
         <TouchableOpacity>
-          <Menu source={require("../../../assets/icons/map.png")} />
+          <Menu
+            source={require("../../../assets/icons/map.png")}
+            style={{ opacity: 0 }}
+          />
         </TouchableOpacity>
         <PlusBtnContainer>
           <Plus_BG source={require("../../../assets/icons/bg_btn.png")} />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goToAddCity}>
             <Plus source={require("../../../assets/icons/plus.png")} />
           </TouchableOpacity>
         </PlusBtnContainer>

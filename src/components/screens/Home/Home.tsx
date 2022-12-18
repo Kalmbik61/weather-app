@@ -1,12 +1,11 @@
-import { LinearGradient } from "expo-linear-gradient";
-import React, { useEffect, useState } from "react";
-import { Alert, SafeAreaView } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { ActivityIndicator, SafeAreaView } from "react-native";
 import styled from "styled-components/native";
-import { API_KEY } from "../../../../config";
 import { getWeather, IWeatherInCity } from "../../../service/getWeather";
+import { css_variables } from "../../../styles/variables";
+import { useCityContext } from "../../../utils/useCityContext";
 import Container from "../../Container/Container";
-import FeelsLike from "../../FeelsLike/FeelsLike";
-import Wind from "../../Wind/Wind";
+import WeatherItem from "../../WeatherItem/WeatherItem";
 
 const Text = styled.Text`
   color: #fff;
@@ -42,32 +41,49 @@ const DescrBlock = styled.View`
 `;
 
 export default function Home() {
-  const [city, setCity] = useState<string>("Rostov-on-Don");
+  const { mainCity } = useCityContext();
   const [weather, setWeather] = useState<IWeatherInCity>();
   const [loading, setLoading] = useState<boolean>(true);
 
   const findWeather = async () => {
-    const res = await getWeather(city, setLoading);
-    console.log(res);
+    const res = await getWeather(mainCity.name, setLoading);
     if (res instanceof Error) return;
     setWeather(res);
   };
 
   useEffect(() => {
     findWeather();
-  }, []);
+  }, [mainCity]);
 
   return (
     <Container>
       <SafeAreaView>
-        <City>{city}</City>
-        <Temp>{weather && Math.round(weather?.main.temp - 273.15)}°</Temp>
-        <WeatherDescr>{weather?.weather[0].description}</WeatherDescr>
+        {loading ? (
+          <ActivityIndicator
+            size='large'
+            color={css_variables.backgrounds.light_purple}
+            style={{ flex: 1, top: 150 }}
+          />
+        ) : (
+          <>
+            <City>{mainCity.name}</City>
+            <Temp>{weather && Math.round(weather?.main.temp - 273.15)}°</Temp>
+            <WeatherDescr>{weather?.weather[0].description}</WeatherDescr>
 
-        <DescrBlock>
-          <FeelsLike K={weather?.main.feels_like} />
-          <Wind wind={weather?.wind.speed} />
-        </DescrBlock>
+            {weather && (
+              <DescrBlock>
+                <WeatherItem
+                  value={`${Math.round(weather.main.feels_like - 273.15)} °`}
+                  name={"Feels like"}
+                />
+                <WeatherItem
+                  value={`${weather.wind.speed} m/s`}
+                  name={"Wind"}
+                />
+              </DescrBlock>
+            )}
+          </>
+        )}
       </SafeAreaView>
     </Container>
   );
